@@ -3,10 +3,19 @@ h1 {
     font-family: Georgia;
 }
 
-input {
+.search {
     margin: 15px 20%;
     width: 60%;
     height: 30px;
+
+}
+
+.add-contact-div {
+    position: absolute;
+    right: 0;
+}
+
+input, button {
     border: none;
     border-bottom: 2px solid rgba(58, 11, 231, 0.356);
 }

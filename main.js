@@ -18,7 +18,7 @@ for(var i = 0; i < allLetters.length; i++) {
 
     var li = document.createElement("li");
 
-    var name = selestName(allLetters[i]);
+    var name = selectName(allLetters[i]);
 
     var ul = document.createElement("ul");
     li.textContent = name;
@@ -56,39 +56,33 @@ function liFilter(enteredText) {
         else {
             contactsLi[i].className = "hide";
         }
-        // divFilter();
+        divFilter(contactsLi[i]);
     }
 }
 
 // ------------------
+function divFilter(filtLi) {
+    var countUlsChild = filtLi.parentElement.childElementCount;
+    var filtUl = filtLi.parentElement;
+    var ulsChild = filtLi.parentElement.children;
+    var countHide = 0;
+    for(var i = 0; i < countUlsChild; i++) {
+        if(ulsChild[i].className === "hide") {
+            countHide++;
+        }
+    }
+    if(countHide === countUlsChild) {
+        filtUl.parentElement.classList.add("hide");
+    }
+    else {
+        filtUl.parentElement.classList.remove("hide");
+    }
 
-// function divFilter() {
-//     var containerDiv = document.querySelectorAll(".containerAlp");
-//     for(var i = 0; i < containerDiv.length; i++) {
-//         var checked = checkHide(i);
-//         if(checked === "ok") {
-//             containerDiv[i].className = "";
-//         }
-//         else {
-//             containerDiv[i].className = "hide";
-//         }
-//     }
-// }
-
-// function checkHide(num) {
-//     console.log(num);
-//     var countUl = document.querySelectorAll("ul")[num];
-//     for(var i = 0; i < countUl.children.length; i++) {
-//         if(!countUl.children[i].classList.contains("hide")) {
-//             console.log(countUl.children[i]);
-//             return "ok";
-//         }
-//     }
-//     return "";
-// }
+}
 
 // -------------------------------
-function selestName(letter) {
+
+function selectName(letter) {
     for(var i = 0; i < names.length; i++) {
         if(letter == (names[i])[0]) {
             return names[i];
@@ -103,7 +97,6 @@ function selestName(letter) {
 
 addButton.addEventListener("click", function() {
     var newName = addInput.value;
-    console.log(newName);
     names.push(newName);
     var number = addLisName(newName);
     var li = document.createElement("li");
@@ -115,13 +108,11 @@ addButton.addEventListener("click", function() {
 
 // --------------------
 function addLisName(name) {
-    console.log("-----");
     for(var i = 0; i < allLetters.length; i++) {
         if(allLetters[i] === name[0].toUpperCase()) {
             document.querySelectorAll(".containerAlp")[i].classList.remove("hide");
             return i;
         }
-
     }
 }
 // -----------------------
